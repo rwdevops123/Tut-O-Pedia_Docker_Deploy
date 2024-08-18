@@ -36,11 +36,11 @@ pipeline {
                 sh 'docker compose down --remove-orphans -v'
             }
         }
+    }
 
         post {
             always {
                 mailTo(to: "rwdevops123@gmail.com", attachLog: true)
            }
         }
-    }
 }
