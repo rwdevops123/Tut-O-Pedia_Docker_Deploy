@@ -33,7 +33,6 @@ pipeline {
             steps {
                 echo "[Tut-O-Pedia_Docker_Database] DOCKER STOP"
                 sh 'docker compose down --remove-orphans -v'
-                sh 'docker compose ps'
             }
         }
     }
