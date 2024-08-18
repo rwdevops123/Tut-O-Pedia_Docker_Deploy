@@ -1,0 +1,39 @@
+services:
+  postgresdb:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=tutopedia_db
+      - PGUSER=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+
+  liquibase:
+    image: liquibase
+    volumes:
+      - /Users/rudiwelter/Workspaces/Tut-O-Pedia/Docker/Tut-O-Pedia_Docker_Database/db/:/db/
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    command: --defaults-file=/db/local/liquibase.properties update
+    # command: /bin/bash -c "sleep infinity"
+
+  backend:
+    image: ruwel123/tutopediabackend
+    ports:
+      - 8080:8080
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+    driver: local
