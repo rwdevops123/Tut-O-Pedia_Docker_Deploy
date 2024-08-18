@@ -26,13 +26,13 @@ services:
     command: --defaults-file=/db/local/liquibase.properties update
     # command: /bin/bash -c "sleep infinity"
 
-  backend:
-    image: ruwel123/tutopediabackend
-    ports:
-      - 8080:8080
-    depends_on:
-      postgresdb:
-        condition: service_healthy
+  # backend:
+  #   image: ruwel123/tutopediabackend
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     postgresdb:
+  #       condition: service_healthy
 
 volumes:
   pgdata:
