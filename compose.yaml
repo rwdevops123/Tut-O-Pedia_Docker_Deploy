@@ -19,7 +19,7 @@ services:
   liquibase:
     image: liquibase
     volumes:
-      - /Users/rudiwelter/Workspaces/Tut-O-Pedia/Docker/Tut-O-Pedia_Docker_Database/db/:/db/
+      - /Users/rudiwelter/Workdir/Tut-O-Pedia/Tut-O-Pedia_Docker_Deploy/db/:/db/
     depends_on:
       postgresdb:
         condition: service_healthy
