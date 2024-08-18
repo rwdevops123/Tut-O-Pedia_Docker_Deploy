@@ -1,3 +1,4 @@
+@Library("jenkins-shared-library") _
 pipeline {
     agent any
 
@@ -34,6 +35,12 @@ pipeline {
                 echo "[Tut-O-Pedia_Docker_Database] DOCKER STOP"
                 sh 'docker compose down --remove-orphans -v'
             }
+        }
+
+        post {
+            always {
+                mailTo(to: "rwdevops123@gmail.com", attachLog: true)
+           }
         }
     }
 }
